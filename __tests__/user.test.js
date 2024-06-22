@@ -5,35 +5,6 @@ const token = process.env.BEARER_TOKEN;
 if (!token) {
  throw new Error("BEARER_TOKEN is not defined. Please set it in the environment variables.");
 }
-describe('Create User API Tests', () => {
-   it('should create a new user', async () => {
-       try {
-           const response = await axios.post(`${baseUrl}/users`, userData, {
-               headers: {
-                   'Authorization': `Bearer ${token}`,
-                   'Content-Type': 'application/json',
-               },
-           });
-           // Assert status code
-           expect(response.status).toBe(201);
-           // Assert response data structure
-           expect(response.data).toHaveProperty('data');
-           expect(response.data.data).toHaveProperty('id');
-           expect(response.data.data).toHaveProperty('name', userData.name);
-           expect(response.data.data).toHaveProperty('email', userData.email);
-           expect(response.data.data).toHaveProperty('gender', userData.gender);
-           expect(response.data.data).toHaveProperty('status', userData.status);
-       } catch (error) {
-           // If request fails
-           if (error.response) {
-               console.error('Error response:', error.response.data);
-           } else {
-               console.error('Error:', error.message);
-           }
-           throw error;
-       }
-   });
-});
 describe('CRUD User Operations', () => {
  let userId;
  const uniqueSuffix = Date.now();
