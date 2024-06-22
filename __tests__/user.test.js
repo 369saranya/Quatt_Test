@@ -1,7 +1,7 @@
 const request = require('supertest');
 const baseUrl = 'https://gorest.co.in/public-api';
-require('dotenv').config();
-const token = process.env.access_token;  // Replace with your actual bearer token
+// require('dotenv').config();
+const token = 'c52c7c49c036329823d6f31b63cdfa19f226b3ee3b458abe77321e4ed0866d75';  // Replace with your actual bearer token
 
 if (!token) {
   throw new Error("ACCESS_TOKEN is not defined. Please set it in the environment variables.");
