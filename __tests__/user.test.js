@@ -1,22 +1,23 @@
 const request = require('supertest');
-const baseUrl = 'https://gorest.co.in/public-api';
-// require('dotenv').config();
-const token = 'c52c7c49c036329823d6f31b63cdfa19f226b3ee3b458abe77321e4ed0866d75';  // Replace with your actual bearer token
-
+require('dotenv').config();
+const baseUrl = process.env.API_URL;
+const token = process.env.BEARER_TOKEN;
 if (!token) {
-  throw new Error("ACCESS_TOKEN is not defined. Please set it in the environment variables.");
+ throw new Error("BEARER_TOKEN is not defined. Please set it in the environment variables.");
 }
-
 describe('CRUD User Operations', () => {
  let userId;
+ const uniqueSuffix = Date.now();
+ const userName = `John Doe ${uniqueSuffix}`;
+ const userEmail = `john.doe${uniqueSuffix}@example.com`;
  it('should create a user', async () => {
    const res = await request(baseUrl)
      .post('/users')
      .set('Authorization', `Bearer ${token}`)
      .send({
-       name: 'John Doe',
+       name: userName,
        gender: 'male',
-       email: `john.doe${Date.now()}@example.com`,
+       email: userEmail,
        status: 'active',
      });
    expect(res.statusCode).toEqual(201);
@@ -35,10 +36,10 @@ describe('CRUD User Operations', () => {
      .put(`/users/${userId}`)
      .set('Authorization', `Bearer ${token}`)
      .send({
-       name: 'John Doe Updated',
+       name: `${userName} Updated`,
      });
    expect(res.statusCode).toEqual(200);
-   expect(res.body.data).toHaveProperty('name', 'John Doe Updated');
+   expect(res.body.data).toHaveProperty('name', `${userName} Updated`);
  });
  it('should delete a user', async () => {
    const res = await request(baseUrl)
