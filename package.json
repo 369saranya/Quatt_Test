@@ -1,4 +1,31 @@
+{
+ "name": "gorest-e2e-tests",
+ "version": "1.0.0",
+ "description": "End-to-end tests for CRUD user operations on the GoRest API using Jest and Supertest.",
+ "main": "index.js",
  "scripts": {
    "test": "jest"
+ },
+ "repository": {
+   "type": "git",
+   "url": "git+https://github.com/yourusername/gorest-e2e-tests.git"
+ },
+ "keywords": [
+   "gorest",
+   "e2e",
+   "tests",
+   "jest",
+   "supertest"
+ ],
+ "author": "Your Name",
+ "license": "MIT",
+ "bugs": {
+   "url": "https://github.com/yourusername/gorest-e2e-tests/issues"
+ },
+ "homepage": "https://github.com/yourusername/gorest-e2e-tests#readme",
+ "devDependencies": {
+   "jest": "^29.0.0",
+   "supertest": "^6.3.0",
+   "dotenv": "^10.0.0"
  }
-
+}
