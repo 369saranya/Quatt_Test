@@ -27,4 +27,4 @@ jobs:
     - run: npm install
     - run: npm test
       env:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        BEARER_TOKEN: ${{ secrets.BEARER_TOKEN }}
