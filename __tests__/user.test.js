@@ -8,9 +8,9 @@ if (!token) {
 describe('Create User API Tests', () => {
    it('should create a new user', async () => {
        try {
-           const response = await axios.post(`${BASE_URL}/users`, userData, {
+           const response = await axios.post(`${baseUrl}/users`, userData, {
                headers: {
-                   'Authorization': `Bearer ${TOKEN}`,
+                   'Authorization': `Bearer ${token}`,
                    'Content-Type': 'application/json',
                },
            });
