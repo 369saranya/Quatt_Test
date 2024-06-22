@@ -1,27 +1,24 @@
-name: quatt_test_api.yml
+name: quatt_test_api
 
 on:
  workflow_dispatch:
-
+ push:
+   branches: [main]
+ pull_request:
+   branches: [main]
 jobs:
-  test:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run tests
-        run: npm test
-
-    env:
-      API_BASE_URL: https://gorest.co.in/public-api
-      API_TOKEN: ${{ secrets.API_TOKEN }}
+ build:
+   runs-on: ubuntu-latest
+   strategy:
+     matrix:
+       node-version: [16.x]
+   steps:
+   - uses: actions/checkout@v2
+   - name: Use Node.js ${{ matrix.node-version }}
+     uses: actions/setup-node@v2
+     with:
+       node-version: ${{ matrix.node-version }}
+   - run: npm install
+   - run: npm test
+     env:
+       ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
