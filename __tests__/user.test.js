@@ -1,6 +1,6 @@
 const request = require('supertest');
 const baseUrl = 'https://gorest.co.in/public-api';
-const token = 'YOUR_ACCESS_TOKEN';  // Replace with your actual bearer token
+const token = ${{ secrets.API_TOKEN }};  // Replace with your actual bearer token
 describe('CRUD User Operations', () => {
  let userId;
  it('should create a user', async () => {
