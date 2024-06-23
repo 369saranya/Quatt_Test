@@ -22,10 +22,10 @@ jobs:
     - name: Create .env file
       uses: ozaytsev86/create-env-file@v1
       with:
-          API_URL: ${{ secrets.API_URL }}
-          BEARER_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+          BASE_URL: ${{ secrets.API_URL }}
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
     - run: npm install
     - run: npm test
       env:
-        BEARER_TOKEN: ${{ secrets.BEARER_TOKEN }}
-        API_URL: ${{ secrets.API_URL }}
+        ACCESS_TOKEN: ${{ secrets.BEARER_TOKEN }}
+        BASE_URL: ${{ secrets.API_URL }}
