@@ -1,29 +1,17 @@
-name: Node.js CI
+name: Run E2E Tests
 on:
- push:
-   branches: [main]
- pull_request:
-   branches: [main]
+ workflow_dispatch:
+
 jobs:
- build:
+ test:
    runs-on: ubuntu-latest
-   strategy:
-     matrix:
-       node-version: [18.x]
    steps:
-   - uses: actions/checkout@v2
-   - name: Setup Node.js ${{ matrix.node-version }}
-     uses: actions/setup-node@v2
-     with:
-       node-version: ${{ matrix.node-version }}
-   - name: Cache node modules
-     uses: actions/cache@v2
-     with:
-       path: ~/.npm
-       key: ${{ runner.os }}-node-${{ hashFiles('package-lock.json') }}
-       restore-keys: |
-         ${{ runner.os }}-node-
-   - run: npm install
-   - run: npm test
-     env:
-       ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+     - uses: actions/checkout@v3  # Checkout your repository code
+     - name: Create environment file
+       run: |
+         echo "BASE_URL=${{ secrets.BASE_URL }}" >> .env
+         echo "ACCESS_TOKEN=${{ secrets.ACCESS_TOKEN }}" >> .env
+       env:
+         SECRETS: ${{ secrets }}
+     - name: Run tests
+       run: npm install && npm test
